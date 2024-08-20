@@ -1,7 +1,9 @@
 ﻿import { FormEvent, useState } from 'react'
 import { validUserLogin } from '../utils/Util'
-import { NavLink } from 'react-router-dom'
+import { NavLink, useNavigate } from 'react-router-dom'
 function Login() {
+
+    const navigate = useNavigate()
 
     // useState
     const [username, setUserName] = useState('')
@@ -12,6 +14,8 @@ function Login() {
         const status = validUserLogin(username, password)
         if (status) {
             console.log("Form Send", username, password)
+            //window.location.href = '/dashboard'
+            navigate('/dashboard')
         }
     }
 
