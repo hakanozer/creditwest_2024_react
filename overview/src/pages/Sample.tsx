@@ -5,6 +5,7 @@ import { IUser } from '../models/IUser'
 function Sample() {
 
   const location = useLocation()
+  const [status, setStatus] = useState(false)
   
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
@@ -34,6 +35,10 @@ function Sample() {
   }, [])
 
   useEffect(() => {
+    setStatus(false)
+    if (username === 'ali') {
+        setStatus(true)
+    }
     setTimeout(() => {
         console.log(username, password)
     }, 3000);
@@ -43,11 +48,25 @@ function Sample() {
 
   return (
     <>
-        <h2>{dataUser?.name}</h2>
+         { dataUser &&
+            <h2>{dataUser.name.length}</h2>
+         }
+
+         {
+            dataUser === null && 
+            <div>Loading..</div>
+         }
+
+         {
+            dataUser ? <h3>{dataUser.name.length}</h3> : <div>Loading..</div>
+         }
+        
         <h2>{params.id}</h2>
         <h3>{cidData}</h3>
         <input onChange={(evt) => setUsername(evt.target.value)} placeholder='username' />
         <input onChange={(evt) => setPassword(evt.target.value)}  placeholder='password' />
+        <hr/>
+        <button className={'btn ' + (status === true ? 'btn-danger' : 'btn-success')}>Send</button>
     </>
   )
 }
