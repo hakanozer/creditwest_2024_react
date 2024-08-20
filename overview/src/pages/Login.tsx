@@ -1,5 +1,6 @@
 ﻿import { FormEvent, useState } from 'react'
 import { validUserLogin } from '../utils/Util'
+import { NavLink } from 'react-router-dom'
 function Login() {
 
     // useState
@@ -29,7 +30,8 @@ function Login() {
                         <input required onChange={ (evt) => setPassword(evt.target.value) } type="password" className="form-control" placeholder = "password" />
                             </div>
                         <button className="btn btn-success">Send</button>
-                        </form>
+                        <NavLink className='btn btn-danger' to='/register' >Register</NavLink>
+                    </form>
                 </div>
                 <div className = "col-sm-4"></div>
             </div>
