@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from 'react'
-import { useParams, useSearchParams } from 'react-router-dom'
+import { useLocation, useParams, useSearchParams } from 'react-router-dom'
+import { IUser } from '../models/IUser'
 
 function Sample() {
 
+  const location = useLocation()
+  
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [cidData, setCidData] = useState('')
@@ -10,8 +13,15 @@ function Sample() {
   const params = useParams() 
   const [searchParams, setSearchParams] = useSearchParams()
 
-  
+  const [dataUser, setDataUser] = useState<IUser>()
   useEffect(() => {
+
+    if(location.state) {
+        const user = location.state as IUser
+        setDataUser(user)
+        console.log(user.email)
+    }
+
     const userId = searchParams.get("userID")
     const cid = searchParams.get("cid")
     if (userId) {
@@ -33,6 +43,7 @@ function Sample() {
 
   return (
     <>
+        <h2>{dataUser?.name}</h2>
         <h2>{params.id}</h2>
         <h3>{cidData}</h3>
         <input onChange={(evt) => setUsername(evt.target.value)} placeholder='username' />
