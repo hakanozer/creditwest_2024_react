@@ -1,6 +1,7 @@
 ﻿import { FormEvent, useState } from 'react'
 import { validUserLogin } from '../utils/Util'
 import { NavLink, useNavigate } from 'react-router-dom'
+import { login } from '../services/customer'
 function Login() {
 
     const navigate = useNavigate()
@@ -13,9 +14,18 @@ function Login() {
         evt.preventDefault() // form gönderimini durdur.
         const status = validUserLogin(username, password)
         if (status) {
-            console.log("Form Send", username, password)
-            //window.location.href = '/dashboard'
-            navigate('/dashboard')
+            login(username, password).then(res => {
+                const dt = res.data
+                console.log(dt)
+            }).catch(err => {
+                console.log("error", err.response.status)
+                console.log(err.message)
+            }).finally(() => {
+                console.log("finish")
+            })
+            console.log("this line call")
+            
+            //navigate('/dashboard')
         }
     }
 
