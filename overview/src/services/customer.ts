@@ -1,3 +1,4 @@
+import { ICustomer } from "../models/ICustomer"
 import { config } from "./config"
 
 export const login = (username: string, password: string) => {
@@ -5,5 +6,5 @@ export const login = (username: string, password: string) => {
         username: username,
         password: password
     }
-    return config.post('auth/login', sendObj)
+    return config.post<ICustomer>('auth/login', sendObj)
 }
