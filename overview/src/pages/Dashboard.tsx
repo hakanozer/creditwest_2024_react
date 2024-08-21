@@ -1,6 +1,7 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { NavLink, useNavigate } from 'react-router-dom'
 import { IUser } from '../models/IUser'
+import { getUser } from '../utils/Util'
 
 function Dashboard() {
   const links = [
@@ -22,6 +23,15 @@ function Dashboard() {
   const sendObj = () => {
     navigate('/sample/100', { state: user })
   }
+
+  useEffect(() => {
+    const userObj = getUser()
+    if (userObj === null) {
+      navigate('/')
+    }
+  }, [])
+
+
   
   return (
     <>
