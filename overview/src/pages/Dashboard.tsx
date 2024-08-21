@@ -24,14 +24,6 @@ function Dashboard() {
     navigate('/sample/100', { state: user })
   }
 
-  useEffect(() => {
-    const userObj = getUser()
-    if (userObj === null) {
-      navigate('/')
-    }
-  }, [])
-
-
   
   return (
     <>

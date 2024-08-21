@@ -21,6 +21,7 @@ function Login() {
                 const stUser = JSON.stringify(dt)
                 const encUser = encrypt(stUser)
                 localStorage.setItem('user', encUser)
+                navigate('/dashboard', {replace: true})
             }).catch(err => {
                 console.log("error", err.response.status)
                 console.log(err.message)
@@ -30,7 +31,7 @@ function Login() {
             })
             console.log("this line call")
             
-            //navigate('/dashboard')
+            //
         }
     }
 
