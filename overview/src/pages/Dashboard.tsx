@@ -4,6 +4,7 @@ import { IUser } from '../models/IUser'
 import { getUser } from '../utils/Util'
 import { allProduct } from '../services/productService'
 import { Product } from '../models/IProducts'
+import ProductItem from '../components/ProductItem'
 
 function Dashboard() {
   const links = [
@@ -48,9 +49,11 @@ function Dashboard() {
         <NavLink to={'/sample/100?userID=50&cid=150'}>Query String</NavLink>
         <button onClick={sendObj} className='btn btn-danger'>Send Object</button>
         */}
-        {arr.map((item, index) => 
-          <div>{item.title}</div>
-        )}
+        <div className='row'>
+          {arr.map((item, index) => 
+            <ProductItem key={index} item={item} />
+          )}
+        </div>
     </>
   )
 }

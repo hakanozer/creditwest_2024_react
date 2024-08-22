@@ -8,6 +8,7 @@ import NotFound from '../pages/NotFound';
 import Sample from '../pages/Sample';
 import Control from '../pages/Control';
 import Likes from '../pages/Likes';
+import ProductDetail from '../pages/ProductDetail';
 
 
 export const route =
@@ -18,6 +19,7 @@ export const route =
         <Route path='/dashboard' element={ <Control item={<Dashboard />} /> } />
         <Route path='/sample/:id' element={ <Control item={<Sample />} /> } />
         <Route path='/likes' element={ <Control item={<Likes />} /> } />
+        <Route path='/productDetail/:id' element={ <Control item={<ProductDetail />} /> } />
         <Route path='*' element={<NotFound />} />
     </Routes>
 </BrowserRouter>
