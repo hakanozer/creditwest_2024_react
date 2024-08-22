@@ -1,7 +1,15 @@
 import React from 'react'
-import { NavLink } from 'react-router-dom'
+import { NavLink, useNavigate } from 'react-router-dom'
+import { ICustomer } from '../models/ICustomer'
 
-function Navbar() {
+function Navbar(props: {user: ICustomer}) {
+
+  const navigate = useNavigate()  
+  const fncLogout = () => {
+    localStorage.removeItem('user')
+    navigate('/', {replace: true})
+  }  
+
   return (
     <nav className="navbar navbar-expand-lg bg-body-tertiary">
     <div className="container-fluid">
@@ -25,11 +33,11 @@ function Navbar() {
                 <li><a className="dropdown-item" href="#">Action</a></li>
                 <li><a className="dropdown-item" href="#">Another action</a></li>
                 <li><hr className="dropdown-divider" /></li>
-                <li><a className="dropdown-item" href="#">Something else here</a></li>
+                <li><a onClick={fncLogout} role='button' className="dropdown-item">Logout</a></li>
             </ul>
             </li>
             <li className="nav-item">
-            <a className="nav-link disabled" aria-disabled="true">Disabled</a>
+            <a className="nav-link disabled" aria-disabled="true">{props.user.firstName + ' '+ props.user.lastName} (0)</a>
             </li>
         </ul>
         <form className="d-flex" role="search">
