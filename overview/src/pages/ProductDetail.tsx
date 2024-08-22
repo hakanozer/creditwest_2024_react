@@ -2,6 +2,9 @@ import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { getProductById } from '../services/productService'
 import { Product } from '../models/IProducts'
+import { useDispatch } from 'react-redux'
+import { ILikesAction } from '../useRedux/ILikesAction'
+import { LikesEnum } from '../useRedux/LikesEnum'
 
 function ProductDetail() {
 
@@ -21,6 +24,17 @@ function ProductDetail() {
     }
   }, [])  
 
+  const dispatch = useDispatch()
+  const addLike = () => {
+    if (item) {
+        const sendItem: ILikesAction = {
+            type:LikesEnum.LIKE_ADD,
+            payload: ''+item.id
+        }
+        dispatch(sendItem)
+    }
+  }
+
   return (
     <>
         { isLoad && 
@@ -36,7 +50,7 @@ function ProductDetail() {
                     <h2>{item.title}</h2>
                     <h3>{item.price}₺</h3>
                     <p>{item.description}</p>
-                    <i style={{fontSize: 40}} className="bi bi-suit-heart"></i>
+                    <i onClick={addLike} style={{fontSize: 40}} className="bi bi-suit-heart"></i>
                 </div>
                 <div className='col-sm-6'>
                     <img src={bigImage} className='img-fluid' style={{maxHeight: 350}} />

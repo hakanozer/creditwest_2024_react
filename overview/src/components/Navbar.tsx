@@ -1,8 +1,13 @@
 import React from 'react'
 import { NavLink, useNavigate } from 'react-router-dom'
 import { ICustomer } from '../models/ICustomer'
+import { useSelector } from 'react-redux'
+import { StateType } from '../useRedux/store'
 
 function Navbar(props: {user: ICustomer}) {
+
+    // useRedux
+    const selector = useSelector((items:StateType) => items.LikesReducer)
 
   const navigate = useNavigate()  
   const fncLogout = () => {
@@ -37,7 +42,7 @@ function Navbar(props: {user: ICustomer}) {
             </ul>
             </li>
             <li className="nav-item">
-            <a className="nav-link disabled" aria-disabled="true">{props.user.firstName + ' '+ props.user.lastName} (0)</a>
+            <a className="nav-link disabled" aria-disabled="true">{props.user.firstName + ' '+ props.user.lastName} ({selector.length})</a>
             </li>
         </ul>
         <form className="d-flex" role="search">
