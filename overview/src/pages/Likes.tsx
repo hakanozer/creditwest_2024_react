@@ -1,9 +1,11 @@
-import React, { useContext, useEffect, useRef } from 'react'
+import React, { useContext, useEffect, useRef, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { StateType } from '../useRedux/store'
 import { Context } from '../utils/AppContext'
 
 function Likes() {
+
+  const [status, setStatus] = useState(true)
 
   const nameRef = useRef<HTMLInputElement>(null)
   useEffect(() => {
@@ -16,7 +18,10 @@ function Likes() {
   // usecontext
   const context = useContext(Context)
   const newName = () =>  {
-    context.setName('Berke Bilmem')
+    if (status) {
+      setStatus(false)
+      context.setName('Berke Bilmem')
+    }
   }
   
   // useRedux
@@ -35,7 +40,7 @@ function Likes() {
             <input ref={nameRef} className='form-control' placeholder='Name' />
         </div>
       </div>
-      <button className='btn btn-danger' onClick={newName}>New Name</button>
+      <button className='btn btn-danger' disabled={status} onClick={ () => ( status && (newName(), setStatus(false))) }>New Name</button>
     </>
   )
 }
