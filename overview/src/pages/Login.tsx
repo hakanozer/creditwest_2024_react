@@ -1,9 +1,11 @@
-﻿import { FormEvent, useState } from 'react'
+﻿import { FormEvent, useContext, useState } from 'react'
 import { encrypt, validUserLogin } from '../utils/Util'
 import { NavLink, useNavigate } from 'react-router-dom'
 import { login } from '../services/customer'
+import { Context } from '../utils/AppContext'
 function Login() {
 
+    const context = useContext(Context)
     const navigate = useNavigate()
 
     // useState
@@ -18,6 +20,7 @@ function Login() {
             setErrorMessage('')
             login(username, password).then(res => {
                 const dt = res.data
+                context.setName(dt.firstName + ' ' + dt.lastName )
                 const stUser = JSON.stringify(dt)
                 const encUser = encrypt(stUser)
                 localStorage.setItem('user', encUser)
