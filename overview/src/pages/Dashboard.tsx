@@ -5,6 +5,7 @@ import { getUser } from '../utils/Util'
 import { allProduct } from '../services/productService'
 import { Product } from '../models/IProducts'
 import ProductItem from '../components/ProductItem'
+import Seo from '../components/Seo'
 
 function Dashboard() {
   const links = [
@@ -37,7 +38,8 @@ function Dashboard() {
 
   
   return (
-    <>
+    <>  
+      <Seo title={'Dashboard'} desc={'Dashboard Desc'} />
         {/* 
         <NavLink to={'/sample/'+110}>Goto Sample</NavLink>
         {links.map((item, index) =>
